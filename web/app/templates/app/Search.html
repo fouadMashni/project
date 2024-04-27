@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            color: #333;
+        }
+        label {
+            font-size: 16px;
+            color: #333;
+        }
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        #courseList {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .course-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .course-item:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Course Search</h1>
+
+    <label for="searchInput">Search Course:</label>
+    <input type="text" id="searchInput" onkeyup="searchCourses()" placeholder="Enter search term...">
+
+    <div id="courseList">
+    </div>
+
+    <script>
+        function searchCourses() {
+            var input, filter, div, items, txtValue;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            div = document.getElementById("courseList");
+            items = div.getElementsByClassName("course-item");
+
+            for (var i = 0; i < items.length; i++) {
+                txtValue = items[i].textContent || items[i].innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    items[i].style.display = "";
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+        }
+
+        document.getElementById("courseList").innerHTML = `
+            <div class='course-item'>Course 1: Introduction to Programming</div>
+            <div class='course-item'>Course 2: Advanced Networking</div>
+            <div class='course-item'>Course 3: Data Structures</div>
+        `;
+    </script>
+</body>
+</html>
